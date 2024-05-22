@@ -44,6 +44,9 @@ function scrollToPage(index) {
 
   if (index >= 4) {
     showGameIntro(nextPage);
+    document.body.classList.add('page5-custom-cursor');  
+  } else {
+    document.body.classList.remove('page5-custom-cursor'); // 다른 페이지에서는 기본 커서로 돌아갑니다.
   }
 
   updateRemoteButtons();
@@ -95,3 +98,35 @@ function showGameIntro(pageObj) {
 }
 
 updateRemoteButtons();
+
+pages[4].addEventListener('click', function(e) {
+  const gifUrl = './image/heart-11534_512.gif'; // 여기에 실제 GIF URL을 넣으세요.
+  const gif = document.createElement('img');
+  gif.src = gifUrl;
+  gif.classList.add('gif');
+  gif.style.left = `${e.clientX}px`;
+  gif.style.top = `${e.clientY}px`;
+  pages[4].appendChild(gif);
+
+  // 애니메이션이 끝난 후 GIF 이미지를 제거
+  gif.addEventListener('animationend', function() {
+      gif.remove();
+  });
+}); 
+
+document.addEventListener('DOMContentLoaded', function() {
+  const rainGifs = document.querySelectorAll('.rain');
+  const rainContainer = document.querySelector('.rain-container');
+
+  // 마우스 이동 이벤트 리스너
+  pages[5].addEventListener('mousemove', function(e) {
+      const containerWidth = pages[5].offsetWidth;
+      const mouseX = e.clientX;
+      const offset = (mouseX / containerWidth) * 500 - 50; // 마우스 위치에 따라 오프셋 계산
+
+      rainGifs.forEach((gif, index) => {
+          const speed = (index + 1) * 0.1; // 각 GIF마다 다른 속도로 움직이게 설정
+          gif.style.transform = `translateX(${offset * speed}px)`;
+      });
+  });
+});
