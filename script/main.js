@@ -55,7 +55,7 @@ function scrollToPage(index) {
     // 우산쓴 오리 이미지 개수
     const imgCnt = 20;
     for (let i = 0; i < imgCnt; i++) {
-      addRandomRainImage();
+      setTimeout(addRandomRainImage, i * 1000);
     }
   }
 
@@ -139,18 +139,17 @@ document.addEventListener('DOMContentLoaded', function() {
   // 마우스 이동 이벤트 리스너
   pages[5].addEventListener('mousemove', function(e) {
     // 우산쓴 오리 이미지들을 선택합니다.
-    const rainGifs = document.querySelectorAll('.rain');
-    // 각도, 좌우 움직을 위한 세팅 값을 가져옵니다
+    const rainImages = document.querySelectorAll('.rain');
+    // // 각도, 좌우 움직을 위한 세팅 값을 가져옵니다
     const containerWidth = pages[5].offsetWidth;
     const mouseX = e.clientX;
-    const offset = (mouseX / containerWidth - 0.5) * 2; // -1에서 1 사이 값으로 변환
+    const moveAmount = (mouseX / containerWidth) * 1000 - 500; // -50%에서 50% 사이의 값
+    const offset = (mouseX / containerWidth - 0.5) * 2;
 
-    rainGifs.forEach((gif, index) => {
-      const speed = (index + 1) * 0.1; // 각 GIF마다 다른 속도로 움직이게 설정
-      const translateX = offset * speed * 100; // X축 이동 거리
-      const rotation = offset * speed * 20; // 회전 각도
-
-      gif.style.transform = `translateX(${translateX}px) rotate(${rotation}deg)`;
+    rainImages.forEach((img, index) => {
+      const speed = (index + 1) * 0.1;
+      const rotation = offset * speed * 20;
+      img.style.transform = `translateX(${moveAmount}px) rotate(${rotation}deg)`;
     });
   });
 });
@@ -162,11 +161,22 @@ function addRandomRainImage() {
   img.src = './image/umbrella_duck.gif';
   img.className = 'rain';
 
+  // 랜덤 크기 설정
+  const randomSize = Math.random() * (20 - 10) + 10; // 10rem에서 20rem 사이의 크기
+  img.style.width = randomSize + 'rem';
+  img.style.height = randomSize + 'rem';
+
   // 랜덤 위치 설정
-  const containerWidth = pages[5].clientWidth;
+  const containerWidth = document.getElementById('page6').clientWidth;
+  const containerHeight = document.getElementById('page6').clientHeight;
   const randomLeft = Math.floor(Math.random() * containerWidth);
+  const randomTop = Math.floor(Math.random() * containerHeight) / 2;
   img.style.left = randomLeft + 'px';
   img.style.top = '0px';  // 필요에 따라 조정 가능
+
+  const duration = Math.random() * (10 - 5) + 5; // 5초에서 10초 사이의 지속 시간
+  img.style.animation = `rain-fall ${duration}s linear infinite`;
+
 
   rainContainer.appendChild(img);
 }
