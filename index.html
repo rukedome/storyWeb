@@ -11,46 +11,42 @@
 <body>
   <div class="page" id="page1">
     <video class="video" loop muted autoplay>
-      <source src="../../../Doc/main_video1.mp4" type="video/mp4">
+      <source src="./video/main_video1.mp4" type="video/mp4">
     </video>
   </div>
   <div class="page" id="page2">
     <video class="video" loop muted autoplay>
-      <source src="../../../Doc/main_video2.mp4" type="video/mp4">
+      <source src="./video/main_video2.mp4" type="video/mp4">
     </video>
   </div>
   <div class="page" id="page3">
     <video class="video" loop muted autoplay>
-      <source src="../../../Doc/main_video3.mp4" type="video/mp4">
+      <source src="./video/main_video3.mp4" type="video/mp4">
     </video>
   </div>
   <div class="page" id="page4">
     <video class="video" loop muted autoplay>
-      <source src="../../../Doc/main_video4.mp4" type="video/mp4">
+      <source src="./video/main_video4.mp4" type="video/mp4">
     </video>
   </div>
   <div class="page" id="page5">
     <div class="game-intro" id="gameIntro">
-      <h1>게임 설명 화면</h1>
+      <video class="video" loop muted autoplay>
+        <source src="./video/page5_info.mp4" type="video/mp4">
+      </video>
     </div>
     <div class="game-content puddle_bg" id="gameContent" style="display: none;">
     </div>
   </div>
+  <img id="page5Cursor" src="./image/duck_sole.svg" style="display: none;">
   <div class="page" id="page6">
     <div class="game-intro" id="gameIntro">
-      <h1>게임 설명 화면</h1>
+      <video class="video" loop muted autoplay>
+        <source src="./video/page6_info.mp4" type="video/mp4">
+      </video>
     </div>
     <div class="game-content" id="gameContent" style="display: none;">
-      <div class="rain-container">
-        <!-- 8개의 비 GIF 추가 -->
-        <img class="rain" style="right: 100px;" src="./image/umbrella_duck.svg">
-        <img class="rain" style="right: 200px;"  src="./image/umbrella_duck.svg">
-        <img class="rain" style="left: 300px;" src="./image/umbrella_duck.svg">
-        <img class="rain" style="right: 400px;" src="./image/umbrella_duck.svg">
-        <img class="rain" style="left: 50px;" src="./image/umbrella_duck.svg">
-        <img class="rain" style="left: 450px;" src="./image/umbrella_duck.svg">
-        <img class="rain" style="left: 600px;" src="./image/umbrella_duck.svg">
-        <img class="rain" style="left: 520px;" src="./image/umbrella_duck.svg">
+      <div class="rain-container" id="rainContainer">
       </div>
     </div>
   </div>

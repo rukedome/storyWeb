@@ -1,4 +1,4 @@
-const pages = document.querySelectorAll(".page");
+const pages = document.querySelectorAll('.page');
 const videos = document.querySelectorAll('.video');
 let currentPageIndex = 0;
 let isScrolling = false;
@@ -37,16 +37,26 @@ function updateRemoteButtons() {
 function scrollToPage(index) {
   if (index < 0 || index >= pages.length) return;
   const nextPage = pages[index];
-  window.scrollTo({ top: nextPage.offsetTop, behavior: "smooth" });
+  window.scrollTo({ top: nextPage.offsetTop, behavior: 'smooth' });
   currentPageIndex = index;
 
   playVideo(index);
-
-  if (index >= 4) {
-    showGameIntro(nextPage);
-    document.body.classList.add('page5-custom-cursor');  
-  } else {
-    document.body.classList.remove('page5-custom-cursor'); // 다른 페이지에서는 기본 커서로 돌아갑니다.
+  // 오리발바닥 커서 이미지 숨기기
+  document.getElementById('page5Cursor').style.display = "none";
+  // 각 page별로 적용될 내용 
+  if (index == 4) { // page5
+    showGameIntro(nextPage, 3000);
+    // 오리발바닥 커서 이미지 표시하기
+    document.getElementById('page5Cursor').style.display = "block";
+  } else if (index == 5) { // page6
+    // 우산쓴 오리 이미지 지우기
+    removeRandomRainImage();
+    showGameIntro(nextPage, 3000);
+    // 우산쓴 오리 이미지 개수
+    const imgCnt = 20;
+    for (let i = 0; i < imgCnt; i++) {
+      addRandomRainImage();
+    }
   }
 
   updateRemoteButtons();
@@ -63,7 +73,7 @@ function playVideo(index) {
   }
 }
 
-window.addEventListener("wheel", (event) => {
+window.addEventListener('wheel', (event) => {
   if (isScrolling) return;
   isScrolling = true;
 
@@ -84,7 +94,9 @@ lastPageButton.addEventListener('click', () => {
   scrollToPage(pages.length - 1);
 });
 
-function showGameIntro(pageObj) {
+// pageObj: 화면전환이 필요한 대상 page div
+// milSec: 화면전환시 몇 초 후에 전환할것인지 밀리세컨
+function showGameIntro(pageObj, milSec) {
   const gameIntro = pageObj.querySelector('#gameIntro');
   const gameContent = pageObj.querySelector('#gameContent');
 
@@ -94,15 +106,17 @@ function showGameIntro(pageObj) {
   setTimeout(() => {
     gameIntro.style.display = 'none';
     gameContent.style.display = 'block';
-  }, 3000); // 3초 후에 전환
+  }, milSec); // 3초 후에 전환
 }
 
 updateRemoteButtons();
 
 pages[4].addEventListener('click', function(e) {
-  const gifUrl = './image/heart-11534_512.gif'; // 여기에 실제 GIF URL을 넣으세요.
+  const gifUrl = './image/wave.gif'; // 여기에 실제 GIF URL을 넣으세요.
   const gif = document.createElement('img');
   gif.src = gifUrl;
+  gif.width = '10rem';
+  gif.height = '10rem';
   gif.classList.add('gif');
   gif.style.left = `${e.clientX}px`;
   gif.style.top = `${e.clientY}px`;
@@ -115,11 +129,18 @@ pages[4].addEventListener('click', function(e) {
 }); 
 
 document.addEventListener('DOMContentLoaded', function() {
-  const rainGifs = document.querySelectorAll('.rain');
-  const rainContainer = document.querySelector('.rain-container');
+
+  pages[4].addEventListener('mousemove', function(e) {
+      const cursor = document.getElementById('page5Cursor');
+      cursor.style.left = e.pageX + 'px';
+      cursor.style.top = e.pageY + 'px';
+  });
 
   // 마우스 이동 이벤트 리스너
   pages[5].addEventListener('mousemove', function(e) {
+    // 우산쓴 오리 이미지들을 선택합니다.
+    const rainGifs = document.querySelectorAll('.rain');
+    // 각도, 좌우 움직을 위한 세팅 값을 가져옵니다
     const containerWidth = pages[5].offsetWidth;
     const mouseX = e.clientX;
     const offset = (mouseX / containerWidth - 0.5) * 2; // -1에서 1 사이 값으로 변환
@@ -133,3 +154,25 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+// 우산을 쓴 오리 이미지를 생성하는 함수
+function addRandomRainImage() {
+  const rainContainer = document.getElementById('rainContainer');
+  const img = document.createElement('img');
+  img.src = './image/umbrella_duck.gif';
+  img.className = 'rain';
+
+  // 랜덤 위치 설정
+  const containerWidth = pages[5].clientWidth;
+  const randomLeft = Math.floor(Math.random() * containerWidth);
+  img.style.left = randomLeft + 'px';
+  img.style.top = '0px';  // 필요에 따라 조정 가능
+
+  rainContainer.appendChild(img);
+}
+
+// 우산 쓴 오리 이미지를 지우는 함수
+function removeRandomRainImage() {
+  const rainContainer = document.getElementById('rainContainer');
+  rainContainer.innerHTML = '';
+}
