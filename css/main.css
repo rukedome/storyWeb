@@ -118,3 +118,11 @@ body {
         top: 100vh; /* GIF가 아래로 흘러내리도록 설정 */
     }
 }
+
+.puddle_bg {
+    width: 100%;
+    height: 100%;
+    background-image: url("../image/puddle_bg.jpg");
+    background-repeat: no-repeat;
+}
+

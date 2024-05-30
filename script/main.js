@@ -85,8 +85,8 @@ lastPageButton.addEventListener('click', () => {
 });
 
 function showGameIntro(pageObj) {
-  const gameIntro = document.getElementById('gameIntro');
-  const gameContent = document.getElementById('gameContent');
+  const gameIntro = pageObj.querySelector('#gameIntro');
+  const gameContent = pageObj.querySelector('#gameContent');
 
   gameIntro.style.display = 'block';
   gameContent.style.display = 'none';
@@ -120,13 +120,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // 마우스 이동 이벤트 리스너
   pages[5].addEventListener('mousemove', function(e) {
-      const containerWidth = pages[5].offsetWidth;
-      const mouseX = e.clientX;
-      const offset = (mouseX / containerWidth) * 500 - 50; // 마우스 위치에 따라 오프셋 계산
+    const containerWidth = pages[5].offsetWidth;
+    const mouseX = e.clientX;
+    const offset = (mouseX / containerWidth - 0.5) * 2; // -1에서 1 사이 값으로 변환
 
-      rainGifs.forEach((gif, index) => {
-          const speed = (index + 1) * 0.1; // 각 GIF마다 다른 속도로 움직이게 설정
-          gif.style.transform = `translateX(${offset * speed}px)`;
-      });
+    rainGifs.forEach((gif, index) => {
+      const speed = (index + 1) * 0.1; // 각 GIF마다 다른 속도로 움직이게 설정
+      const translateX = offset * speed * 100; // X축 이동 거리
+      const rotation = offset * speed * 20; // 회전 각도
+
+      gif.style.transform = `translateX(${translateX}px) rotate(${rotation}deg)`;
+    });
   });
 });
