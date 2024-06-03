@@ -17,7 +17,7 @@ pages[4].addEventListener("click", function (e) {
 
 // 우산을 쓴 오리 이미지를 생성하는 함수
 function addRandomRainImage() {
-  const rainContainer = document.getElementById("rainContainer");
+  const page6Container = document.getElementById("page6Container");
   const img = document.createElement("img");
   img.src = "./image/umbrella_duck.gif";
   img.className = "rain";
@@ -38,13 +38,13 @@ function addRandomRainImage() {
   const duration = Math.random() * (10 - 5) + 5; // 5초에서 10초 사이의 지속 시간
   img.style.animation = `rain-fall ${duration}s linear infinite`;
 
-  rainContainer.appendChild(img);
+  page6Container.appendChild(img);
 }
 
 // 우산 쓴 오리 이미지를 지우는 함수
 function removeRandomRainImage() {
-  const rainContainer = document.getElementById("rainContainer");
-  rainContainer.innerHTML = "";
+  const page6Container = document.getElementById("page6Container");
+  page6Container.innerHTML = "";
 
   pageTimers["page6"].forEach((timerId) => clearTimeout(timerId));
   pageTimers["page6"] = []; // 배열 초기화
@@ -54,7 +54,7 @@ let isDragging = false; // 드래그 상태를 추적하기 위한 변수
 
 // 오리가 걸어가는 모션의 이미지 생성
 function addWalkingDuck(bottomPercentage, duration) {
-  const moveContainer = document.getElementById("moveContainer");
+  const page7Container = document.getElementById("page7Container");
   const img = document.createElement("img");
   img.src = "./image/umbrella_duck.gif"; // 오리 이미지 경로 설정
   img.className = "walking-duck";
@@ -101,14 +101,38 @@ function addWalkingDuck(bottomPercentage, duration) {
     }
   });
 
-  moveContainer.appendChild(img);
+  page7Container.appendChild(img);
 }
 
 // 걸어가는 모션의 이미지를 지우는 함수
 function removeRandomWalkingImage() {
-  const moveContainer = document.getElementById("moveContainer");
-  moveContainer.innerHTML = "";
+  const page7Container = document.getElementById("page7Container");
+  page7Container.innerHTML = "";
 
   pageTimers["page7"].forEach((timerId) => clearTimeout(timerId));
   pageTimers["page7"] = []; // 배열 초기화
 }
+
+// 페이지 8에 필요한 설정
+function setupPage8() {
+  const page8Container = document.getElementById('page8Container');
+  page8Container.innerHTML = `
+    <img src="./image/umbrella_duck.gif" class="duck" id="duck1">
+    <img src="./image/umbrella_duck.gif" class="duck" id="duck2">
+    <img src="./image/umbrella_duck.gif" class="duck" id="duck3">
+    <img src="./image/umbrella_duck.gif" class="duck" id="duck4">
+    <img src="./image/umbrella_duck.gif" class="duck" id="duck5">
+  `;
+
+  const ducks = document.querySelectorAll('.duck');
+  ducks.forEach(duck => {
+    duck.addEventListener('click', function () {
+      if (duck.src.includes('duck_floating.gif')) {
+        duck.src = './image/duck_upside_down.gif'; // 클릭 시 물속으로 뒤집어진 오리
+      } else {
+        duck.src = './image/duck_floating.gif'; // 다시 클릭 시 원래 오리
+      }
+    });
+  });
+}
+

@@ -128,7 +128,7 @@ body {
     animation-timing-function: linear;
 }
 
-.rain-container img {
+.page6-container img {
     width: 15rem;
     height: 15rem;
 }
@@ -147,7 +147,7 @@ body {
     background-repeat: no-repeat;
 }
 
-.move-container {
+.page7-container {
     position: relative;
     width: 100%;
     height: 100%;
@@ -166,4 +166,43 @@ body {
     to {
         right: 110%; /* 화면 왼쪽 밖으로 이동 */
     }
+}
+
+.page8-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.duck {
+    position: absolute;
+    width: 15rem;
+    height: 15rem;
+    cursor: pointer;
+}
+
+#duck1 {
+    top: 15%;
+    left: 15%;
+}
+
+#duck2 {
+    top: 15%;
+    right: 15%;
+}
+
+#duck3 {
+    bottom: 15%;
+    left: 15%;
+}
+
+#duck4 {
+    bottom: 15%;
+    right: 15%;
+}
+
+#duck5 {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

@@ -87,6 +87,9 @@ function scrollToPage(index, smooth = true) {
       );
       pageTimers["page7"].push(timerId);
     });
+  } else if (index == 7) {
+    showGameIntro(nextPage, 3000);
+    setupPage8();
   }
 
   updateRemoteButtons();
@@ -164,6 +167,17 @@ document.addEventListener("DOMContentLoaded", function () {
       const speed = (index + 1) * 0.1;
       const rotation = offset * speed * 20;
       img.style.transform = `translateX(${moveAmount}px) rotate(${rotation}deg)`;
+    });
+  });
+
+  const ducks = document.querySelectorAll('.duck');
+  ducks.forEach(duck => {
+    duck.addEventListener('click', function () {
+      if (duck.src.includes('duck_floating.gif')) {
+        duck.src = './image/duck_upside_down.gif'; // 클릭 시 물속으로 뒤집어진 오리
+      } else {
+        duck.src = './image/duck_floating.gif'; // 다시 클릭 시 원래 오리
+      }
     });
   });
 });
