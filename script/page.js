@@ -54,9 +54,9 @@ let isDragging = false; // 드래그 상태를 추적하기 위한 변수
 
 // 오리가 걸어가는 모션의 이미지 생성
 function addWalkingDuck(bottomPercentage, duration) {
-  const page7Container = document.getElementById("page7Container");
+  const moveContainer = document.getElementById("moveContainer");
   const img = document.createElement("img");
-  img.src = "./image/umbrella_duck.gif"; // 오리 이미지 경로 설정
+  img.src = "./image/walk_duck.gif"; // 오리 이미지 경로 설정
   img.className = "walking-duck";
 
   // 크기 설정
@@ -65,9 +65,14 @@ function addWalkingDuck(bottomPercentage, duration) {
 
   img.style.bottom = bottomPercentage + "vh"; // 상대적 높이 설정
   img.style.animationDuration = duration + "s"; // 애니메이션 지속 시간 설정
+  img.style.position = 'absolute'; // position 설정 추가
 
   let isDragging = false; // 드래그 상태를 추적하기 위한 변수
   let offsetX, offsetY; // 마우스 클릭 위치와 이미지 위치 간의 오프셋
+
+  img.addEventListener('dragstart', (event) => {
+    event.preventDefault();
+  });
 
   // 오리 클릭 이벤트 리스너 추가
   img.addEventListener("mousedown", (event) => {
@@ -77,31 +82,36 @@ function addWalkingDuck(bottomPercentage, duration) {
     offsetX = event.clientX - img.getBoundingClientRect().left;
     offsetY = event.clientY - img.getBoundingClientRect().top;
     img.style.cursor = "grabbing"; // 커서 변경
+
+    // 오리 드래그 이동
+    img.addEventListener("mousemove", onMouseMove);
+    // 오리 드래그 종료
+    img.addEventListener("mouseup", onMouseUp);
   });
 
-  // 오리 드래그 이동
-  document.addEventListener("mousemove", (event) => {
+  function onMouseMove(event) {
     if (isDragging) {
       img.style.left = event.clientX - offsetX + "px";
       img.style.top = event.clientY - offsetY + "px";
     }
-  });
+  }
 
-  // 오리 드래그 종료
-  document.addEventListener("mouseup", () => {
+  function onMouseUp() {
     if (isDragging) {
-      img.src = "./image/walking_duck.gif"; // 다시 걷는 오리 이미지 경로 설정
+      img.src = "./image/walk_duck.gif"; // 다시 걷는 오리 이미지 경로 설정
       img.style.animationPlayState = "running"; // 애니메이션 재개
       isDragging = false; // 드래그 종료
       img.style.cursor = "grab"; // 커서 변경
 
-      // 위치 초기화
       img.style.left = "";
       img.style.top = "";
+      // 이벤트 리스너 제거
+      img.removeEventListener("mousemove", onMouseMove);
+      img.removeEventListener("mouseup", onMouseUp);
     }
-  });
+  }
 
-  page7Container.appendChild(img);
+  moveContainer.appendChild(img);
 }
 
 // 걸어가는 모션의 이미지를 지우는 함수
@@ -117,20 +127,20 @@ function removeRandomWalkingImage() {
 function setupPage8() {
   const page8Container = document.getElementById('page8Container');
   page8Container.innerHTML = `
-    <img src="./image/umbrella_duck.gif" class="duck" id="duck1">
-    <img src="./image/umbrella_duck.gif" class="duck" id="duck2">
-    <img src="./image/umbrella_duck.gif" class="duck" id="duck3">
-    <img src="./image/umbrella_duck.gif" class="duck" id="duck4">
-    <img src="./image/umbrella_duck.gif" class="duck" id="duck5">
+    <img src="./image/front_duck.gif" class="duck" id="duck1">
+    <img src="./image/front_duck.gif" class="duck" id="duck2">
+    <img src="./image/front_duck.gif" class="duck" id="duck3">
+    <img src="./image/front_duck.gif" class="duck" id="duck4">
+    <img src="./image/front_duck.gif" class="duck" id="duck5">
   `;
 
   const ducks = document.querySelectorAll('.duck');
   ducks.forEach(duck => {
     duck.addEventListener('click', function () {
-      if (duck.src.includes('duck_floating.gif')) {
-        duck.src = './image/duck_upside_down.gif'; // 클릭 시 물속으로 뒤집어진 오리
+      if (duck.src.includes('front_duck.gif')) {
+        duck.src = './image/back_duck.gif'; // 클릭 시 물속으로 뒤집어진 오리
       } else {
-        duck.src = './image/duck_floating.gif'; // 다시 클릭 시 원래 오리
+        duck.src = './image/front_duck.gif'; // 다시 클릭 시 원래 오리
       }
     });
   });

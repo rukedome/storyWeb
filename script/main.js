@@ -71,13 +71,13 @@ function scrollToPage(index, smooth = true) {
   } else if (index == 6) {
     // page7
     showGameIntro(nextPage, 3000);
-    // 우산쓴 오리 이미지 개수
+    // 걸어가는 오리 이미지 개수
     const ducks = [
-      { bottom: 20, duration: 10 },
-      { bottom: 20, duration: 12 },
-      { bottom: 20, duration: 14 },
-      { bottom: 20, duration: 16 },
-      { bottom: 20, duration: 18 },
+      { bottom: 10, duration: 10 },
+      { bottom: 10, duration: 12 },
+      { bottom: 10, duration: 14 },
+      { bottom: 10, duration: 16 },
+      { bottom: 10, duration: 18 },
     ];
 
     ducks.forEach((duck, index) => {
@@ -89,7 +89,8 @@ function scrollToPage(index, smooth = true) {
     });
   } else if (index == 7) {
     showGameIntro(nextPage, 3000);
-    setupPage8();
+  } else if (index == 8) {
+    showGameIntro(nextPage, 3000);
   }
 
   updateRemoteButtons();

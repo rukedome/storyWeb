@@ -63,7 +63,7 @@ body {
 .video {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: fill;
 }
 
 .game-intro {
@@ -74,7 +74,7 @@ body {
 .game-intro img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: fill;
 }
 
 #page5 {
@@ -140,14 +140,14 @@ body {
     }
 }
 
-.puddle_bg {
+.page5_bg {
     width: 100%;
     height: 100%;
-    background-image: url("../image/puddle_bg.jpg");
+    background-image: url("../image/page5_bg.jpg");
     background-repeat: no-repeat;
 }
 
-.page7-container {
+.page7-container, .page8-container {
     position: relative;
     width: 100%;
     height: 100%;
@@ -168,16 +168,19 @@ body {
     }
 }
 
-.page8-container {
-    position: relative;
+.page7_bg {
     width: 100%;
     height: 100%;
+    background-image: url("../image/page7_bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
 }
 
 .duck {
     position: absolute;
-    width: 15rem;
-    height: 15rem;
+    width: 20rem;
+    height: 20rem;
     cursor: pointer;
 }
 
@@ -205,4 +208,32 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.page8_bg {
+    width: 100%;
+    height: 100%;
+    background-image: url("../image/page8_bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.page9_bg {
+    width: 100%;
+    height: 100%;
+    background: url("../image/page8_bg.jpg") repeat-x;
+    background-repeat: repeat-x;
+    background-size: cover;
+    background-position: 0 0;
+    animation: moveBackground 10s linear infinite; /* 애니메이션 적용 */
+}
+
+@keyframes moveBackground {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: -100vw 0; /* 배경 이미지가 한 화면 너비만큼 이동 */
+    }
 }
