@@ -12,6 +12,8 @@ let pageTimers = {
   page8: [],
 };
 
+let pageChangeTimers = [];
+
 function updateRemoteButtons() {
   remoteButtonsContainer.innerHTML = "";
 
@@ -56,12 +58,12 @@ function scrollToPage(index, smooth = true) {
   // 각 page별로 적용될 내용
   if (index == 5) {
     // page6
-    showGameIntro(nextPage, 10000, 3000);
+    showGameIntro(nextPage, 5000, 3000);
     // 오리발바닥 커서 이미지 표시하기
     document.getElementById("page6Cursor").style.display = "block";
   } else if (index == 6) {
     // page7
-    showGameIntro(nextPage, 7000, 3000);
+    showGameIntro(nextPage, 5000, 3000);
     // 우산쓴 오리 이미지 개수
     const imgCnt = 20;
     for (let i = 0; i < imgCnt; i++) {
@@ -70,7 +72,7 @@ function scrollToPage(index, smooth = true) {
     }
   } else if (index == 7) {
     // page8
-    showGameIntro(nextPage, 10000, 3000);
+    showGameIntro(nextPage, 5000, 3000);
     // 걸어가는 오리 이미지 개수
     const ducks = [
       { bottom: 10, duration: 10 },
@@ -88,12 +90,12 @@ function scrollToPage(index, smooth = true) {
       pageTimers["page8"].push(timerId);
     });
   } else if (index == 8) {
-    showGameIntro(nextPage, 10000, 3000);
+    showGameIntro(nextPage, 5000, 3000);
     setupPage9();
   } else if (index == 9) {
-    showGameIntro(nextPage, 10000, 3000);
+    showGameIntro(nextPage, 5000, 3000);
   } else if (index == 10) {
-    showGameIntro(nextPage, 10000, 0);
+    showGameIntro(nextPage, 5000, 0);
   }
 
   updateRemoteButtons();
@@ -145,18 +147,24 @@ function showGameIntro(pageObj, introMilSec, descriptionMilSec) {
     gameDescriptionOverlay.style.display = "none";
   }
 
-  setTimeout(() => {
+  pageChangeTimers.forEach((timerId) => clearTimeout(timerId));
+  pageChangeTimers = []; // 배열 초기화
+
+  let timerId1 = setTimeout(() => {
     gameIntro.style.display = "none";
     gameContent.style.display = "block";
     
     if (gameDescriptionOverlay) {
       gameDescriptionOverlay.style.display = "flex";
 
-      setTimeout(() => {
+      let timerId2 = setTimeout(() => {
         gameDescriptionOverlay.style.display = "none";
       }, descriptionMilSec); // 게임 설명 오버레이가 사라지는 시간
+      pageChangeTimers.push(timerId2);
     }
   }, introMilSec); // 게임 콘텐츠와 설명 오버레이가 등장하는 시간
+
+  pageChangeTimers.push(timerId1);
 }
 
 updateRemoteButtons();
