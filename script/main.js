@@ -33,7 +33,7 @@ function updateRemoteButtons() {
   for (let i = startPage; i <= endPage; i++) {
     const button = document.createElement("div");
     button.className = "button";
-    button.textContent = i + 1;
+    // button.textContent = i + 1;
     button.addEventListener("click", () => {
       scrollToPage(i);
     });
