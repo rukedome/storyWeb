@@ -44,7 +44,6 @@
     </div>
     <div class="game-description-overlay">
       <div class="game-description-content">
-        <img src="./image/game_title_1.png" class="gameTitle">
         <img src="./image/game_text_1.png" class="gameDescriptionImage">
       </div>
     </div>
@@ -56,13 +55,12 @@
         <source src="./video/page7_info.mp4" type="video/mp4">
       </video>
     </div>
-    <div class="game-content" style="display: none;">
+    <div class="game-content page7_bg" style="display: none;">
       <div class="page7-container" id="page7Container">
       </div>
     </div>
     <div class="game-description-overlay">
       <div class="game-description-content">
-        <img src="./image/game_title_2.png" class="gameTitle">
         <img src="./image/game_text_2.png" class="gameDescriptionImage">
       </div>
     </div>
@@ -79,7 +77,6 @@
     </div>
     <div class="game-description-overlay">
       <div class="game-description-content">
-        <img src="./image/game_title_3.png" class="gameTitle">
         <img src="./image/game_text_3.png" class="gameDescriptionImage">
       </div>
     </div>
@@ -96,7 +93,6 @@
     </div>
     <div class="game-description-overlay">
       <div class="game-description-content">
-        <img src="./image/game_title_4.png" class="gameTitle">
         <img src="./image/game_text_4.png" class="gameDescriptionImage">
       </div>
     </div>
@@ -108,11 +104,12 @@
       </video>
     </div>
     <div class="game-content page10_bg" style="display: none;">
-      <img src="./image/wave_duck.gif">
+      <div class="page10-container" id="page10Container">
+        <img src="./image/wave_duck.gif">
+      </div>
     </div>
     <div class="game-description-overlay">
       <div class="game-description-content">
-        <img src="./image/game_title_5.png" class="gameTitle">
         <img src="./image/game_text_5.png" class="gameDescriptionImage">
       </div>
     </div>
@@ -123,20 +120,9 @@
         <source src="./video/page11_info.mp4" type="video/mp4">
       </video>
     </div>
-    <div class="game-content page11_bg" style="display: none;">
-      <div class="page11-container" id="page11Container">
-        <img src="./image/duck_sole.svg" class="duck-foot" data-video="page5_info.mp4">
-        <img src="./image/duck_sole.svg" class="duck-foot" data-video="page6_info.mp4">
-        <img src="./image/duck_sole.svg" class="duck-foot" data-video="page7_info.mp4">
-        <img src="./image/duck_sole.svg" class="duck-foot" data-video="page8_info.mp4">
-        <img src="./image/duck_sole.svg" class="duck-foot" data-video="page9_info.mp4">
-        <img src="./image/duck_sole.svg" class="duck-foot" data-video="page10_info.mp4">
-        <img src="./image/duck_sole.svg" class="duck-foot" data-video="page11_info.mp4">
-      </div>
-    </div>
-    <div class="fullscreen-video" id="fullscreenVideo">
-      <video id="fullscreenPlayer" controls>
-          <source id="fullscreenSource" type="video/mp4">
+    <div class="game-content" style="display: none;">
+      <video class="video" muted autoplay>
+        <source src="./video/page11_content_info.mp4" type="video/mp4">
       </video>
     </div>
   </div>

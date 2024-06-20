@@ -127,48 +127,21 @@ function removeRandomWalkingImage() {
 function setupPage9() {
   const page9Container = document.getElementById('page9Container');
   page9Container.innerHTML = `
-    <img src="./image/front_duck.gif" class="duck" id="duck1">
-    <img src="./image/front_duck.gif" class="duck" id="duck2">
-    <img src="./image/front_duck.gif" class="duck" id="duck3">
-    <img src="./image/front_duck.gif" class="duck" id="duck4">
-    <img src="./image/front_duck.gif" class="duck" id="duck5">
+    <img src="./image/back_duck.gif" class="duck" id="duck1">
+    <img src="./image/back_duck.gif" class="duck" id="duck2">
+    <img src="./image/back_duck.gif" class="duck" id="duck3">
+    <img src="./image/back_duck.gif" class="duck" id="duck4">
+    <img src="./image/back_duck.gif" class="duck" id="duck5">
   `;
 
   const ducks = document.querySelectorAll('.duck');
   ducks.forEach(duck => {
     duck.addEventListener('click', function () {
-      if (duck.src.includes('front_duck.gif')) {
-        duck.src = './image/back_duck.gif'; // 클릭 시 물속으로 뒤집어진 오리
+      if (duck.src.includes('back_duck.gif')) {
+        duck.src = './image/front_duck.gif'; // 클릭 시 물속으로 뒤집어진 오리
       } else {
-        duck.src = './image/front_duck.gif'; // 다시 클릭 시 원래 오리
+        duck.src = './image/back_duck.gif'; // 다시 클릭 시 원래 오리
       }
     });
   });
 }
-
-// 각 오리발바닥 이미지를 클릭했을 때의 동작을 정의
-document.querySelectorAll('.duck-foot').forEach(function(foot) {
-  foot.addEventListener('click', function() {
-      // 클릭된 오리발바닥의 data-video 속성에서 동영상 파일 이름을 가져옴
-      let videoSrc = foot.getAttribute('data-video');
-      // 전체 화면 비디오 요소와 그 내부의 비디오 플레이어 요소를 가져옴
-      let fullscreenVideo = document.getElementById('fullscreenVideo');
-      let fullscreenPlayer = document.getElementById('fullscreenPlayer');
-      let fullscreenSource = document.getElementById('fullscreenSource');
-
-      // 동영상 소스를 설정하고 비디오를 로드한 후 재생
-      fullscreenSource.src = './video/' + videoSrc;
-      fullscreenPlayer.load();
-      fullscreenVideo.style.display = 'flex';
-      fullscreenPlayer.play();
-  });
-});
-
-// 전체 화면 비디오 영역을 클릭했을 때의 동작을 정의
-document.getElementById('fullscreenVideo').addEventListener('click', function() {
-  let fullscreenVideo = document.getElementById('fullscreenVideo');
-  let fullscreenPlayer = document.getElementById('fullscreenPlayer');
-  // 비디오를 일시 정지하고 전체 화면 비디오 영역을 숨김
-  fullscreenPlayer.pause();
-  fullscreenVideo.style.display = 'none';
-});

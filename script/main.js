@@ -58,7 +58,7 @@ function scrollToPage(index, smooth = true) {
   // 각 page별로 적용될 내용
   if (index == 5) {
     // page6
-    showGameIntro(nextPage, 5000, 3000);
+    showGameIntro(nextPage, 7000, 3000);
     // 오리발바닥 커서 이미지 표시하기
     document.getElementById("page6Cursor").style.display = "block";
   } else if (index == 6) {
@@ -154,6 +154,11 @@ function showGameIntro(pageObj, introMilSec, descriptionMilSec) {
     gameIntro.style.display = "none";
     gameContent.style.display = "block";
     
+    let isVideo = gameContent.querySelector('.video');
+    if (isVideo) {
+      isVideo.play();
+    }
+
     if (gameDescriptionOverlay) {
       gameDescriptionOverlay.style.display = "flex";
 
@@ -192,17 +197,6 @@ document.addEventListener("DOMContentLoaded", function () {
       const speed = (index + 1) * 0.1;
       const rotation = offset * speed * 20;
       img.style.transform = `translateX(${moveAmount}px) rotate(${rotation}deg)`;
-    });
-  });
-
-  const ducks = document.querySelectorAll('.duck');
-  ducks.forEach(duck => {
-    duck.addEventListener('click', function () {
-      if (duck.src.includes('duck_floating.gif')) {
-        duck.src = './image/duck_upside_down.gif'; // 클릭 시 물속으로 뒤집어진 오리
-      } else {
-        duck.src = './image/duck_floating.gif'; // 다시 클릭 시 원래 오리
-      }
     });
   });
 });
