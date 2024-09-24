@@ -14,9 +14,12 @@ let pageTimers = {
 
 let pageChangeTimers = [];
 
-function playRandomDuckSound(type) {
-  const sounds1 = ["./audio/오리소리1.mp3", "./audio/오리소리2.wav", "./audio/오리소리3.wav"];
-  const sounds2 = ["./audio/오리바둥바둥소리1.wav", "./audio/오리바둥바둥소리2.wav"];
+function playRandomDuckSound(mode) {
+  let sounds = ["./audio/오리소리1.mp3", "./audio/오리소리2.wav", "./audio/오리소리3.wav"];
+  if (mode == 'move') {
+    sounds = ["./audio/오리바둥바둥소리1.wav", "./audio/오리바둥바둥소리2.wav"];
+  }
+
   const randomIndex = Math.floor(Math.random() * sounds.length);
   const audio = new Audio(sounds[randomIndex]);
   audio.play();
@@ -74,6 +77,11 @@ function scrollToPage(index, smooth = true) {
     showGameIntro(nextPage, 7000, 3000);
     
     const numberOfDrops = 100; // 생성할 빗방울의 개수
+    const rainDiv = document.getElementsByClassName('rain');
+    for (let i = 0; i < rainDiv?.length; i++) {
+      rainDiv[i].remove();
+    }
+    
     // 빗방울을 numberOfDrops 개수만큼 생성
     for (let i = 0; i < numberOfDrops; i++) {
       createRainDrop();
@@ -214,6 +222,6 @@ document.addEventListener("DOMContentLoaded", function () {
       img.style.transform = `translateX(${moveAmount}px) rotate(${rotation}deg)`;
     });
 
-    playRandomDuckSound();
+    // playRandomDuckSound('');
   });
 });

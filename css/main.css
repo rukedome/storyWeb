@@ -225,8 +225,8 @@ body {
 }
 
 #duck5 {
-    top: 50%;
-    left: 50%;
+    top: 70%;
+    left: 70%;
     transform: translate(-50%, -50%);
 }
 
@@ -257,8 +257,8 @@ body {
 }
 
 #page10Container img {
-    width: 105rem;
-    height: 55rem;
+    width: 50%;
+    height: 50%;
 }
 
 @keyframes moveBackground {
@@ -315,3 +315,20 @@ body {
     height: auto;
 }
 
+.page11_bg {
+    width: 100%;
+    height: 100%;
+    background-image: url("../image/page11_bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.page11_bg img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 200px;
+    height: 200px;
+    transform: translate(-50%, -50%);
+}

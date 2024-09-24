@@ -9,7 +9,7 @@ pages[5].addEventListener("click", function (e) {
   gif.style.top = `${e.clientY}px`;
   pages[5].appendChild(gif);
 
-  playRandomDuckSound();
+  playRandomDuckSound('');
 
   // 애니메이션이 끝난 후 GIF 이미지를 제거
   gif.addEventListener("animationend", function () {
@@ -106,7 +106,8 @@ function addWalkingDuck(bottomPercentage, duration) {
     offsetX = event.clientX - img.getBoundingClientRect().left;
     offsetY = event.clientY - img.getBoundingClientRect().top;
     img.style.cursor = "grabbing"; // 커서 변경
-
+    playRandomDuckSound('move');
+    
     // 오리 드래그 이동
     img.addEventListener("mousemove", onMouseMove);
     // 오리 드래그 종료
@@ -166,7 +167,7 @@ function setupPage9() {
       } else {
         duck.src = './image/back_duck.gif'; // 다시 클릭 시 원래 오리
       }
-      playRandomDuckSound();
+      playRandomDuckSound('');
     });
   });
 }
